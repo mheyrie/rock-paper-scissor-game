@@ -10,100 +10,79 @@ let wins= 0;
 let losses= 0;
 let ties= 0;
 
-
-
 function firstFunc(){
-    const randomNumber = Math.random()
-    let computerMove;
-    if(randomNumber>=0 && randomNumber<1/3){
-        computerMove = '✊'
-    }else if(randomNumber>=1/3 && randomNumber<2/3){
-        computerMove = '🖐️'
-    }else{
-        computerMove = '✌️'
-    }
-    
-    let result;
-    if(computerMove === '✊'){
-        result = 'Tie'
-        ties++
-    }else if(computerMove === '🖐️'){
-        result = 'You Lose'
-        losses++
-    }else if(computerMove === '✌️'){
-        result = 'You Win'
-        wins++
-    }
-    resultWord.textContent = `${result}`
-    displayMoves.textContent =`You: ✊ | Computer:${computerMove}`
-    score.textContent =`Wins: ${wins}, Losses:${losses}, Ties:${ties}`
-    // alert(`You picked ✊. Computer picked ${computerMove}. ${result}.`)
+    playGame('✊')
 }
 
 function secondFunc(){
-    const randomNumber = Math.random()
-    let computerMove;
-    if(randomNumber>=0 && randomNumber<1/3){
-        computerMove = '✊'
-    }else if(randomNumber>=1/3 && randomNumber<2/3){
-        computerMove = '🖐️'
-    }else{
-        computerMove = '✌️'
-    }
-    
-    let result;
-    if(computerMove === '✊'){
-        result = 'You Win'
-        wins++
-    }else if(computerMove === '🖐️'){
-        result = 'Tie'
-        ties++
-    }else if(computerMove === '✌️'){
-        result = 'You Lose'
-        losses++
-    }
-
-    resultWord.textContent = `${result}`
-    displayMoves.textContent =`You: 🖐️ | Computer:${computerMove}`
-    score.textContent =`Wins: ${wins}, Losses:${losses}, Ties:${ties}`
-    // alert(`You picked 🖐️. Computer picked ${computerMove}. ${result}.`)
-
+    playGame('🖐️')
 }
+
 function thirdFunc(){
-    const randomNumber = Math.random()
-    let computerMove;
-    if(randomNumber>=0 && randomNumber<1/3){
-        computerMove = '✊'
-    }else if(randomNumber>=1/3 && randomNumber<2/3){
-        computerMove = '🖐️'
-    }else{
-        computerMove = '✌️'
-    }
-
-    let result;
-    if(computerMove === '✊'){
-        result = 'You Win'
-        wins++
-    }else if(computerMove === '🖐️'){
-        result = 'You Lose'
-        losses++
-    }else if(computerMove === '✌️'){
-        result = 'Tie'
-        ties++
-    }
-    resultWord.textContent = `${result}`
-    displayMoves.textContent =`You: ✌️ | Computer:${computerMove}`
-    score.textContent =`Wins: ${wins}, Losses:${losses}, Ties:${ties}`
-
-    // alert(`You picked ✌️s . Computer picked ${computerMove}. ${result}.`)
+    playGame('✌️')
 }
 
 function displayScores(){
+    return score.textContent =`Wins: ${wins}, Losses: ${losses}, Ties: ${ties}`
+}
+
+function pickComputerMoves(){
+    const randomNumber = Math.random()
+    let computerMove;
+    if(randomNumber>=0 && randomNumber<1/3){
+        computerMove = '✊';
+    }else if(randomNumber>=1/3 && randomNumber<2/3){
+        computerMove = '🖐️';
+    }else{
+        computerMove = '✌️';
+    }
+    return computerMove;
+}
+
+function playGame(playerMove){
+    const computerMove = pickComputerMoves();
+    let result;
+    if (playerMove === '✌️') {
+        if(computerMove === '✊'){
+        result = 'You Win'
+        wins++
+        }else if(computerMove === '🖐️'){
+            result = 'You Lose'
+            losses++
+        }else if(computerMove === '✌️'){
+            result = 'Tie'
+            ties++
+        }
+    } else if (playerMove === '🖐️'){
+        if(computerMove === '✊'){
+            result = 'You Win'
+            wins++
+        }else if(computerMove === '🖐️'){
+            result = 'Tie'
+            ties++
+        }else if(computerMove === '✌️'){
+            result = 'You Lose'
+            losses++
+        }
+    } else if (playerMove === '✊'){
+        if(computerMove === '✊'){
+            result = 'Tie'
+            ties++
+        }else if(computerMove === '🖐️'){
+            result = 'You Lose'
+            losses++
+        }else if(computerMove === '✌️'){
+            result = 'You Win'
+            wins++
+        }
+    }
+    resultWord.textContent = `${result}`
+    displayMoves.textContent =`You: ${playerMove} | Computer:${computerMove}`
     score.textContent =`Wins: ${wins}, Losses: ${losses}, Ties: ${ties}`
 }
-displayScores()
 
 function resetFunc(){
+    displayMoves.textContent ="Click any of the image above to begin"
     wins=0
     losses=0
     ties=0
