@@ -5,6 +5,8 @@ const score = document.querySelector('.scores')
 const resultWord = document.querySelector('.result-word')
 const displayMoves = document.querySelector('.display-moves')
 const resetBtn = document.querySelector('.reset-scores').addEventListener('click', resetFunc)
+const autoPlay = document.querySelector('.auto-play').addEventListener('click', autoPlayFunc)
+
 
 // let wins= 0;
 // let losses= 0;
@@ -53,6 +55,25 @@ function pickComputerMoves(){
     return computerMove;
 }
 
+let isAutoPlaying = false
+let IntervalId;
+function autoPlayFunc(){
+    if(!isAutoPlaying){
+        IntervalId = setInterval(function() {
+        const playerMov = pickComputerMoves()
+        playGame(playerMov)
+        }, 1000);
+        isAutoPlaying = true
+    }else{
+        clearInterval(IntervalId)
+        isAutoPlaying = false
+    }
+    
+}
+
+
+
+
 function playGame(playerMove){
     const computerMove = pickComputerMoves();
     let result;
@@ -94,6 +115,9 @@ function playGame(playerMove){
 
     }
     resultWord.textContent = `${result}`
+    resultWord.style.fontWeight = "bolder"
+    resultWord.style.color = 'grey'
+    resultWord.style.fontSize = '30px'
     displayMoves.textContent =`You: ${playerMove} | Computer:${computerMove}`
     score.textContent =`Wins: ${scoresTrack.wins}, Losses: ${scoresTrack.losses}, Ties: ${scoresTrack.ties}`
 }
