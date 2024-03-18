@@ -67,6 +67,7 @@ function autoPlayFunc(){
     }else{
         clearInterval(IntervalId)
         isAutoPlaying = false
+        autoPlay.inner
     }
     
 }
